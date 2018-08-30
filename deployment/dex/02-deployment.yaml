@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dex
+  name: dex
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dex
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: dex
+    spec:
+      containers:
+      - command:
+        - /usr/local/bin/dex
+        - serve
+        - /etc/dex/cfg/config.yaml
+        image: quay.io/coreos/dex:v2.10.0
+        imagePullPolicy: Always
+        name: dex
+        ports:
+        - containerPort: 5556
+          name: https
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/dex/cfg
+          name: config
+      volumes:
+      - configMap:
+          items:
+          - key: config.yaml
+            path: config.yaml
+          name: dex
+        name: config

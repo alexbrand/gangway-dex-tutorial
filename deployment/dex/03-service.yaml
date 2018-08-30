@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: dex
+spec:
+  selector:
+    app: dex
+  ports:
+  - port: 5556
+    targetPort: https
+    name: https
