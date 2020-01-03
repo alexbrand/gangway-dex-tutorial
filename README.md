@@ -131,7 +131,7 @@ The following table describes placeholders that must be updated before deploying
 | `${CLUSTER_NAME}` | The name of your cluster. This is mainly for display purposes |
 | `${DNS_NAME}` | Update the placeholder with the domain that you own. For example, if you own `example.com`, the value of issuer should be `https://dex.example.com/dex` |
 | `${OIDC_CLIENT_SECRET}` | This is the secret that was generated before |
-| `${KUBERNETES_APISERVER_URL}` | The address of the API server |
+| `${KUBERNETES_APISERVER_URL}` | The address of the API server. For example: `https://apiserver.example.com:6443` |
 
 Update the following files before deploying:
 
